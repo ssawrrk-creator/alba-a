@@ -105,7 +105,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     border: 0;
 }
 
-/* HERO・01〜09の日本語見出しは同じルール。意味のまとまりで折り返します。 */
+/* HERO・01〜08の日本語見出しは同じルール。意味のまとまりで折り返します。 */
 .section-title {
     font-family: var(--serif);
     font-size: var(--title-size);
@@ -122,7 +122,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     display: none;
 }
 
-/* 01〜09のラベル、セクション上余白、本文の行幅を共通化。 */
+/* 01〜08のラベル、セクション上余白、本文の行幅を共通化。 */
 .section-shell {
     width: min(var(--width), 88%);
     margin-inline: auto;
@@ -332,33 +332,40 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     color: #75806c;
 }
 
-/* 01・02：見出しと本文を左揃えで並べ、同じ読線に。 */
-.problem, .concept, .sleep-section, .about-section, .salon, .spa-section {
+/* 共感・施術・休息・OWNER・サロンの基本2カラム。 */
+.problem, .sleep-section, .about-section, .salon, .spa-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: var(--column-gap);
     align-items: start;
 }
 
+/* 01：悩みの本文と、サロンからの締めのメッセージ。 */
 .problem-scenes {
     color: var(--muted);
 }
-.problem-ending {
-    font-family: var(--serif);
-    font-size: 17px;
-}
-.script-word {
-    display: block;
-    margin-top: 30px;
-    text-align: right;
-    font-family: "Mrs Saint Delafield", cursive;
-    font-size: 46px;
-    font-weight: 400;
-    color: #a29e8b;
-    transform: rotate(-2deg);
+.problem-copy > .problem-ending {
+    margin-top: 42px;
+    font: 400 23px/1.9 var(--serif);
+    letter-spacing: .045em;
 }
 
-/* 03・05の背景のみ全幅。ラベルの上余白はsection-shellの共通値。 */
+/* PCの01だけ、整列を保ったまま一画面ほどの余白を持たせます。 */
+@media (min-width: 901px) {
+    .problem {
+        min-height: clamp(620px, calc(100svh - 100px), 960px);
+        padding-block: clamp(100px, 16vh, 180px);
+        align-content: center;
+    }
+    .problem-copy {
+        padding-top: 16px;
+    }
+    .problem-copy > .problem-ending {
+        margin-top: 56px;
+    }
+}
+
+/* 02・04の背景のみ全幅。ラベルの上余白はsection-shellの共通値。 */
 .spa-section, .menu-section {
     width: 100%;
     padding-inline: max(6%, calc((100% - var(--width)) / 2));
@@ -376,7 +383,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     margin-top: var(--paragraph-gap);
 }
 
-/* 04：朝の光の写真と、締めの言葉 */
+/* 03：朝の光の写真と、締めの言葉 */
 .sleep-message {
     margin-top: 36px !important;
     font: 400 23px/1.9 var(--serif);
@@ -388,7 +395,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     background: linear-gradient(110deg, #deded1, #f7f3e9 55%, #ebe1d2);
 }
 
-/* 05：コースの番号・時間・内容・料金・説明を、余白で整理 */
+/* 04：コースの番号・時間・内容・料金・説明を、余白で整理 */
 .menu-list {
     margin-top: 48px;
 }
@@ -463,7 +470,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     font: 400 17px/1.8 var(--serif);
 }
 
-/* 06：手書きの画像と短い感想。アンケートは切り抜かず全体を表示。 */
+/* 05：手書きの画像と短い感想。アンケートは切り抜かず全体を表示。 */
 .voice-heading {
     display: flex;
     align-items: end;
@@ -515,7 +522,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     text-align: right;
 }
 
-/* 07：署名だけAlluraに変更。ヘッダーの.brandには適用しません。 */
+/* 06：署名だけAlluraに変更。ヘッダーの.brandには適用しません。 */
 .about-copy {
     order: 1;
 }
@@ -529,6 +536,14 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     margin-top: var(--heading-gap);
     font-size: 18px;
 }
+/* OWNERは本文と同じ文字で語り、段落の余白だけで区切ります。 */
+.about-copy > .owner-belief,
+.about-copy > .owner-message {
+    margin-top: 34px;
+}
+.about-copy > .owner-message {
+    margin-top: 38px;
+}
 .signature {
     display: block;
     width: fit-content;
@@ -540,7 +555,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     transform-origin: right center;
 }
 
-/* 08：住所はエリアだけ。罫線は情報表内部に限定。 */
+/* 07：住所はエリアだけ。罫線は情報表内部に限定。 */
 .tags {
     display: flex;
     flex-wrap: wrap;
@@ -832,7 +847,7 @@ footer small {
         width: 100%;
         height: 480px;
     }
-    .problem, .concept, .sleep-section, .about-section, .salon, .spa-section {
+    .problem, .sleep-section, .about-section, .salon, .spa-section {
         grid-template-columns: 1fr;
         row-gap: var(--heading-gap);
     }
@@ -930,11 +945,8 @@ footer small {
         font-size: 22px;
         letter-spacing: .1em;
     }
-    .problem-ending {
-        font-size: 16px;
-    }
-    .script-word {
-        font-size: 36px;
+    .problem-copy > .problem-ending {
+        font-size: 20px;
     }
     .spa-photo, .morning-photo {
         height: 300px;
